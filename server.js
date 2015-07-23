@@ -7,7 +7,7 @@ var React = require('react');
 var Router = require('react-router');
 var routes = require('./app/routes');
 var mongoose = require('mongoose');
-var Employee = require('./models/employee');
+var ssh2 = require("ssh2");
 
 var app = express();
 

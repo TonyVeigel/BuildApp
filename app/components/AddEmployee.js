@@ -11,11 +11,11 @@ class AddEmployee extends React.Component{
   }
 
   componentDidMount(){
-
+    AddEmployeeStore.listen(this.onChange)
   }
 
   componentWillUnmount(){
-
+    AddEmployeeStore.unlisten(this.onChange)
   }
 
   onChange(state){
@@ -24,8 +24,6 @@ class AddEmployee extends React.Component{
 
 
   render(){
-
-
 
     return(
 
