@@ -8,17 +8,10 @@ class Header extends React.Component{
       return(
 
         <div className="header_container">
-          <div className="row">
             <div className="main_header">
-              <div className="col-sm-8">
-                Granite Falls In/Out Board
+              <div className="container">
+                Deployment App
               </div>
-              <div className="col-sm-4 ">
-                <div className="time_container ">
-                  <Time/>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 

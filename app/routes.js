@@ -8,5 +8,6 @@ export default (
   <Route handler={App}>
     <Route path='/' handler={Home}/>
     <Route path='/add' handler={AddDeploy}/>
+    <Route path='/review' handler={ReviewDeployments}/>
   </Route>
 );
