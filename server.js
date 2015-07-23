@@ -7,13 +7,15 @@ var React = require('react');
 var Router = require('react-router');
 var routes = require('./app/routes');
 var mongoose = require('mongoose');
-var ssh2 = require("ssh2");
 var async = require('async');
 var request = require('request');
 var Deploy = require('./models/deploy')
 var uuid = require('node-uuid');
+var ssh2 = require("ssh2");
 
 var app = express();
+var client = new ssh2();
+
 
 mongoose.connect('mongodb://tony.veigel:Granite2015!@ds051630.mongolab.com:51630/deployapp');
 
@@ -35,22 +37,47 @@ app.post('/api/deploy', function(req, res, next){
   var password = req.body.password;
   var email = req.body.email;
   var remoteLocation = "/home/" + username + "/" + appName + ".war";
-  var client = require('scp2')
 
   async.waterfall([
     function(callback){
-      client.scp(localLoc, {
+      client.connect({
         host: environment,
         username: username,
-        password: password,
-        path: remoteLocation
-      }, function(err){
-          if(err){
-            callback(err);
-        }
-          callback();
+        password: password
       });
-    }], function(err, result){
+
+      client.on('error', function(err) {
+        callback(err);
+      });
+
+      client.on('ready', function() {
+
+        console.log("ready");
+
+        client.sftp(function (err, sftp) {
+          if (err) {
+            callback(err);
+          };
+          sftp.fastPut(localLoc, remoteLocation, {}, function (err) {
+            if(err){
+              callback(err);
+          }
+              callback(null);
+          });
+      });
+    });
+  }, function(callback){
+
+    client.exec('cp /home/veigelto/college-search.war /apps/build/college-search/devstaging ', function(err, stream){
+      console.log("copying");
+        if(err){
+              console.log(err);
+              callback(err);
+        }
+        callback(null);
+    });
+
+  }], function(err, result){
 
       var deployRecord = new Deploy({
         deployId: uuid.v4(),
