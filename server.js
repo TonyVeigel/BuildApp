@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.post('/api/deploy', function(req, res, next){
+app.post('/api/deploy', function(req, res){
 
   var appName = req.body.appName;
   var environment = req.body.environment;
@@ -45,15 +45,14 @@ app.post('/api/deploy', function(req, res, next){
         username: username,
         password: password
       });
-
       client.on('error', function(err) {
         callback(err);
       });
-
-      client.on('ready', function() {
-
-        console.log("ready");
-
+      client.on('ready', function(err) {
+        callback(null);
+      });
+    },
+    function(callback){
         client.sftp(function (err, sftp) {
           if (err) {
             callback(err);
@@ -61,24 +60,19 @@ app.post('/api/deploy', function(req, res, next){
           sftp.fastPut(localLoc, remoteLocation, {}, function (err) {
             if(err){
               callback(err);
-          }
+            }
               callback(null);
           });
       });
-    });
   }, function(callback){
-
     client.exec('cp /home/veigelto/college-search.war /apps/build/college-search/devstaging ', function(err, stream){
       console.log("copying");
         if(err){
-              console.log(err);
               callback(err);
         }
         callback(null);
     });
-
   }], function(err, result){
-
       var deployRecord = new Deploy({
         deployId: uuid.v4(),
         appName: appName,
@@ -87,20 +81,21 @@ app.post('/api/deploy', function(req, res, next){
         time: new Date().toString(),
         status: err ? "Deploy failed" : "Deployed successfuly"
       });
-
       deployRecord.save(function(err){
         if(err){
-          console.log(err);
           return res.status(500).send({message:err});
         }
       });
-
       if(err){
-        console.log(err);
         return res.status(500).send({message:err});
       }
       return res.status(200).send({message:err});
     });
+});
+
+app.get('/api/review', function(req, res){
+
+
 });
 
 

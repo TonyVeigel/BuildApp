@@ -15,7 +15,8 @@ class AddDeployActions{
       'updatePassword',
       'updateAppName',
       'updateDeployStatus',
-      'updateDeployMessage'
+      'updateDeployMessage',
+      'updateHelpBlock'
     );
   }
 

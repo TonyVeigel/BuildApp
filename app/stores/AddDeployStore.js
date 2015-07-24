@@ -17,14 +17,19 @@ class AddDeployStore {
     this.appName = '';
     this.deployStatus = '';
     this.deployMessage = '';
+    this.helpBlock = '';
 
   }
+  onUpdateHelpBlock(message){
+    this.helpBlock = message;
+    this.deployStatus = 'alert-info';
+  }
   onAddDeploySuccess(message){
-    this.deployMessage = "Depolyment was Successful";
+    this.helpBlock = "Depolyment was Successful";
     this.deployStatus = 'alert-success';
   }
   onAddDeployFail(message){
-    this.deployMessage = "Deployment Failed";
+    this.helpBlock = "Deployment Failed";
     this.deployStatus = 'alert-danger'
   }
   onUpdateDeployStatus(message){
@@ -50,6 +55,8 @@ class AddDeployStore {
   }
   onUpdateUsername(event){
     this.username = event.target.value;
+    this.helpBlock = '';
+    this.deployStatus = '';
   }
   onUpdatePassword(event){
     this.password = event.target.value;
