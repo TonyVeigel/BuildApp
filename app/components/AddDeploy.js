@@ -2,6 +2,7 @@ import React from 'react';
 import AddDeployStore from '../stores/AddDeployStore';
 import AddDeployActions from '../actions/AddDeployActions';
 import DeploymentSummary from './DeploymentSummary';
+import MessageCenter from './MessageCenter';
 
 class AddDeploy extends React.Component{
 
@@ -41,8 +42,7 @@ class AddDeploy extends React.Component{
       this.refs.usernameTextField.getDOMNode().focus();
     }
     if(username){
-      AddDeployActions.updateDeployStatus("alert-info");
-      AddDeployActions.updateDeployMessage("Deploy is in process. Please wait.....");
+      AddDeployActions.updateHelpBlock("Deploy is in process. Please wait.....");
       AddDeployActions.addDeploy(email, environment, localLoc, server, appName, deployTime, username, password);
     }
   }
@@ -145,9 +145,8 @@ class AddDeploy extends React.Component{
               </div>
             </div>
             <div className="col-md-5">
-              <div className={'alert ' + this.state.deployStatus}>{this.state.helpBlock}</div>
+              <MessageCenter/>
             </div>
-
           </form>
         </div>
       </div>

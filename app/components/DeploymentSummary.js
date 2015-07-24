@@ -12,6 +12,12 @@ class DeploymentSummary extends React.Component{
 
   componentDidMount(){
     AddDeployStore.listen(this.onChange);
+
+    let socket = io.connect();
+
+    socket.on('statusMessage', (data) => {
+      AddDeployActions.updateHelpBlock(data);
+    });
   }
 
   componentWillUnmount(){

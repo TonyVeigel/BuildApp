@@ -12,8 +12,12 @@ var request = require('request');
 var Deploy = require('./models/deploy')
 var uuid = require('node-uuid');
 var ssh2 = require("ssh2");
+var exec = require('child_process').exec;
 
 var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+
 var client = new ssh2();
 
 
@@ -39,7 +43,37 @@ app.post('/api/deploy', function(req, res){
   var remoteLocation = "/home/" + username + "/" + appName + ".war";
 
   async.waterfall([
+
     function(callback){
+
+      io.sockets.emit('statusMessage', 'Building war file.');
+      process.chdir(localLoc);
+      exec ('grails war ' + appName +'.war', function(err, stdout, strerr){
+        if(err){
+          callback(err);
+        }
+        callback(null);
+      });
+    },
+    function(callback){
+      console.log("b")
+
+      exec ('grails test-app', function(err, stdout, strerr){
+        io.sockets.emit('statusMessage', 'Running test.');
+
+        if(err){
+          console.log(err);
+          callback(err);
+        }
+        callback(null);
+      });
+    }
+    ,function(callback){
+
+      console.log("c")
+
+      io.sockets.emit('statusMessage', 'Connecting to server.');
+
       client.connect({
         host: environment,
         username: username,
@@ -53,11 +87,15 @@ app.post('/api/deploy', function(req, res){
       });
     },
     function(callback){
+
+      console.log("d")
+      io.sockets.emit('statusMessage', 'Transfering file to server.');
+
         client.sftp(function (err, sftp) {
           if (err) {
             callback(err);
           };
-          sftp.fastPut(localLoc, remoteLocation, {}, function (err) {
+          sftp.fastPut(localLoc + '/' + appName + '.war', remoteLocation, {}, function (err) {
             if(err){
               callback(err);
             }
@@ -65,14 +103,19 @@ app.post('/api/deploy', function(req, res){
           });
       });
   }, function(callback){
+
+    console.log("e")
+
     client.exec('cp /home/veigelto/college-search.war /apps/build/college-search/devstaging ', function(err, stream){
-      console.log("copying");
         if(err){
               callback(err);
         }
         callback(null);
     });
   }], function(err, result){
+
+    console.log("f")
+
       var deployRecord = new Deploy({
         deployId: uuid.v4(),
         appName: appName,
@@ -93,9 +136,15 @@ app.post('/api/deploy', function(req, res){
     });
 });
 
-app.get('/api/review', function(req, res){
+app.get('/api/deploys', function(req, res){
 
-
+  Deploy.find({},function(err, deploys){
+    if(err){
+      console.log(err);
+      return res.status(500).send({message:'error'});
+    }
+    return res.send(deploys);
+  })
 });
 
 
@@ -107,6 +156,15 @@ app.use(function(req, res) {
   });
 });
 
-app.listen(app.get('port'), function() {
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+
+io.sockets.on('connection', function(socket) {
+  socket.on('statusMessage', function(msg){
+      io.emit('statusMessage', msg);
+    });
+  });
+
+server.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
