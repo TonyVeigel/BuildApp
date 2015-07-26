@@ -29,19 +29,31 @@ class AddDeploy extends React.Component{
     event.preventDefault();
 
     var email = this.state.email;
-    var password = this.state.password;
+    var password = this.state.password.trim();
     var username = this.state.username.trim();
     var deployTime = this.state.deployTime;
-    var localLoc = this.state.localLoc;
+    var localLoc = this.state.localLoc.trim();
     var server = this.state.server;
     var environment = this.state.environment;
-    var appName = this.state.appName;
+    var appName = this.state.appName.trim();
 
+    if(!password){
+      AddDeployActions.updateHelpBlock("Please enter a password.");
+      this.refs.passwordTextField.getDOMNode().focus();
+    }
     if(!username){
       AddDeployActions.updateHelpBlock("Please enter a username.");
       this.refs.usernameTextField.getDOMNode().focus();
     }
-    if(username){
+    if(!localLoc){
+      AddDeployActions.updateHelpBlock("Please enter a file location.");
+      this.refs.localLocTextField.getDOMNode().focus();
+    }
+    if(!appName){
+      AddDeployActions.updateHelpBlock("Please enter a app name.");
+      this.refs.appNameTextField.getDOMNode().focus();
+    }
+    if(username && password && localLoc && appName){
       AddDeployActions.updateHelpBlock("Deploy is in process. Please wait.....");
       AddDeployActions.addDeploy(email, environment, localLoc, server, appName, deployTime, username, password);
     }
@@ -149,6 +161,7 @@ class AddDeploy extends React.Component{
             </div>
           </form>
         </div>
+        
       </div>
     )
   }

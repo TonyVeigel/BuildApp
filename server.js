@@ -13,11 +13,7 @@ var Deploy = require('./models/deploy')
 var uuid = require('node-uuid');
 var ssh2 = require("ssh2");
 var exec = require('child_process').exec;
-
 var app = express();
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
-
 var client = new ssh2();
 
 
@@ -40,47 +36,35 @@ app.post('/api/deploy', function(req, res){
   var username = req.body.username;
   var password = req.body.password;
   var email = req.body.email;
-  var remoteLocation = "/home/" + username + "/" + appName + ".war";
 
   async.waterfall([
-
     function(callback){
-
-      io.sockets.emit('statusMessage', 'Building war file.');
-      process.chdir(localLoc);
-      exec ('grails war ' + appName +'.war', function(err, stdout, strerr){
-        if(err){
-          callback(err);
-        }
-        callback(null);
+      try {
+        process.chdir(localLoc);
+        io.sockets.emit('statusMessage', 'Building war file.');
+        exec ('grails war', function(err, stdout, stderr){
+          callback(err, "Building war failed.");
+        });
+      }
+      catch (err) {
+        callback(err, "Could not find directory.");
+      }
+    },
+    function(message, callback){
+      io.sockets.emit('statusMessage', 'Running test.');
+      exec ('grails test-app', function(err, stdout, stderr){
+        callback(err, stdout ? stdout : "Running tests failed.");
       });
     },
-    function(callback){
-      console.log("b")
-
-      exec ('grails test-app', function(err, stdout, strerr){
-        io.sockets.emit('statusMessage', 'Running test.');
-
-        if(err){
-          console.log(err);
-          callback(err);
-        }
-        callback(null);
-      });
-    }
-    ,function(callback){
-
-      console.log("c")
-
+    function(message, callback){
       io.sockets.emit('statusMessage', 'Connecting to server.');
-
       client.connect({
         host: environment,
         username: username,
         password: password
       });
       client.on('error', function(err) {
-        callback(err);
+        callback("Connecting to server failed.");
       });
       client.on('ready', function(err) {
         callback(null);
@@ -88,83 +72,76 @@ app.post('/api/deploy', function(req, res){
     },
     function(callback){
 
-      console.log("d")
       io.sockets.emit('statusMessage', 'Transfering file to server.');
-
-        client.sftp(function (err, sftp) {
-          if (err) {
-            callback(err);
-          };
-          sftp.fastPut(localLoc + '/' + appName + '.war', remoteLocation, {}, function (err) {
-            if(err){
-              callback(err);
-            }
-              callback(null);
-          });
+      var remoteLocation = "/home/" + username + "/" + appName + ".war";
+      client.sftp(function (err, sftp) {
+        if (err) {
+          return callback(err);
+        };
+        sftp.fastPut(localLoc + '/' + appName + '.war', remoteLocation, {}, function (err) {
+          callback(err);
+        });
       });
-  }, function(callback){
-
-    console.log("e")
-
-    client.exec('cp /home/veigelto/college-search.war /apps/build/college-search/devstaging ', function(err, stream){
-        if(err){
-              callback(err);
-        }
-        callback(null);
-    });
-  }], function(err, result){
-
-    console.log("f")
+    },
+    function(callback){
+      client.exec('cp /home/veigelto/college-search.war /apps/build/college-search/devstaging ', function(err, stream){
+        callback(err);
+      });
+    }],
+    function(err, message){
 
       var deployRecord = new Deploy({
         deployId: uuid.v4(),
         appName: appName,
         environment: environment,
         user: username,
-        time: new Date().toString(),
-        status: err ? "Deploy failed" : "Deployed successfuly"
+        time: new Date(),
+        status: err ? "Deploy failed" : "Deployed successfuly",
+        reason: message
       });
       deployRecord.save(function(err){
         if(err){
-          return res.status(500).send({message:err});
+          return res.status(500).send({message:"Could not save record to DB. Deploy Successful."});
         }
       });
       if(err){
-        return res.status(500).send({message:err});
+        return res.status(500).send({message:message});
       }
-      return res.status(200).send({message:err});
+      return res.status(200).send({message:"Build Successful"});
     });
-});
-
-app.get('/api/deploys', function(req, res){
-
-  Deploy.find({},function(err, deploys){
-    if(err){
-      console.log(err);
-      return res.status(500).send({message:'error'});
-    }
-    return res.send(deploys);
-  })
-});
-
-
-app.use(function(req, res) {
-  Router.run(routes, req.path, function(Handler) {
-    var html = React.renderToString(React.createElement(Handler));
-    var page = swig.renderFile('views/index.html', { html: html });
-    res.send(page);
   });
-});
 
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
+  app.get('/api/deploys', function(req, res){
 
-io.sockets.on('connection', function(socket) {
-  socket.on('statusMessage', function(msg){
+    Deploy
+      .find()
+      .sort('-time')
+      .exec(function(err, deploys) {
+        if(err){
+          console.log(err);
+          return res.status(500).send({message:'error'});
+        }
+        return res.send(deploys);
+      });
+    });
+
+  app.use(function(req, res) {
+    Router.run(routes, req.path, function(Handler) {
+      var html = React.renderToString(React.createElement(Handler));
+      var page = swig.renderFile('views/index.html', { html: html });
+      res.send(page);
+    });
+  });
+
+  var server = require('http').createServer(app);
+  var io = require('socket.io')(server);
+
+  io.sockets.on('connection', function(socket) {
+    socket.on('statusMessage', function(msg){
       io.emit('statusMessage', msg);
     });
   });
 
-server.listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + app.get('port'));
-});
+  server.listen(app.get('port'), function() {
+    console.log('Express server listening on port ' + app.get('port'));
+  });

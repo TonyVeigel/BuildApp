@@ -25,11 +25,11 @@ class AddDeployStore {
     this.deployStatus = 'alert-info';
   }
   onAddDeploySuccess(message){
-    this.helpBlock = "Depolyment was Successful";
+    this.helpBlock = message;
     this.deployStatus = 'alert-success';
   }
   onAddDeployFail(message){
-    this.helpBlock = "Deployment Failed";
+    this.helpBlock = message;
     this.deployStatus = 'alert-danger'
   }
   onUpdateDeployStatus(message){

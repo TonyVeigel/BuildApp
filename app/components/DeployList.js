@@ -44,6 +44,9 @@ class DeployList extends React.Component {
             <div className="col-md-2">
               {deploy.status}
             </div>
+            <div className="col-md-2">
+              {deploy.reason}
+            </div>
           </div>
         </div>
       )
@@ -66,6 +69,9 @@ class DeployList extends React.Component {
           </div>
           <div className="col-md-2">
             Status
+          </div>
+          <div className="col-md-2">
+            Reason
           </div>
         </div>
         <div className='list-group'>

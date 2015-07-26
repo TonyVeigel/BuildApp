@@ -1,6 +1,7 @@
 import React from 'react';
 import {RouteHandler} from 'react-router';
-import Header from './Header'
+import Header from './Header';
+import Navagation from './Navagation';
 
 class App extends React.Component{
 
@@ -13,6 +14,7 @@ class App extends React.Component{
     return(
       <div>
         <Header/>
+        <Navagation/>
         <RouteHandler/>
       </div>
     )
