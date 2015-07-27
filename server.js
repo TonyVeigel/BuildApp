@@ -41,8 +41,8 @@ app.post('/api/deploy', function(req, res){
     function(callback){
       try {
         process.chdir(localLoc);
-        io.sockets.emit('statusMessage', 'Building war file.');
-        exec ('grails war', function(err, stdout, stderr){
+        io.sockets.emit('statusMessage', 'Building war file......');
+        exec ('grails war ' + appName + '.war', function(err, stdout, stderr){
           callback(err, "Building war failed.");
         });
       }
@@ -51,41 +51,79 @@ app.post('/api/deploy', function(req, res){
       }
     },
     function(message, callback){
-      io.sockets.emit('statusMessage', 'Running test.');
+      io.sockets.emit('statusMessage', 'Running tests.....');
       exec ('grails test-app', function(err, stdout, stderr){
-        callback(err, stdout ? stdout : "Running tests failed.");
+        callback(null, stdout ? stdout : "Running tests failed.");
       });
     },
     function(message, callback){
-      io.sockets.emit('statusMessage', 'Connecting to server.');
+      io.sockets.emit('statusMessage', 'Connecting to server......');
       client.connect({
         host: environment,
         username: username,
         password: password
       });
       client.on('error', function(err) {
-        callback("Connecting to server failed.");
+        callback(err, "Connecting to server failed.");
       });
       client.on('ready', function(err) {
-        callback(null);
+        callback(null, "Ready.");
       });
     },
-    function(callback){
-
-      io.sockets.emit('statusMessage', 'Transfering file to server.');
+    function(message, callback){
+      io.sockets.emit('statusMessage', 'Transferring file to server......');
       var remoteLocation = "/home/" + username + "/" + appName + ".war";
       client.sftp(function (err, sftp) {
         if (err) {
-          return callback(err);
-        };
-        sftp.fastPut(localLoc + '/' + appName + '.war', remoteLocation, {}, function (err) {
-          callback(err);
+          callback(err, "SFTP Failed.");
+        }else{
+          sftp.fastPut(localLoc + '/' + appName + '.war', remoteLocation, {}, function (err) {
+            callback(err, "Transferring file failed.");
+          });
+        }
+      });
+    },
+    function(message, callback){
+      io.sockets.emit('statusMessage', 'Copying file from home directoy to devstaging......');
+      var location = "cp /home/" + username +"/" + appName + ".war /apps/build/" + appName + "/devstaging\n"
+      client.exec('sudo su - jboss', {pty: true}, function(err, stream){
+
+        if(err){
+          callback(err)
+        }
+
+        var b = '', pwsent = false;
+        stream.on('data', function(data) {
+          if (!pwsent) {
+            b += data.toString();
+            if (b.substr(-2) === ': ') {
+              pwsent = true;
+              stream.write(password + '\n');
+              stream.write(location);
+              b = '';
+              callback(err, "Done.");
+            }else{
+              stream.write(location);
+              callback(err, "Done.");
+            }
+          }
         });
       });
     },
-    function(callback){
-      client.exec('cp /home/veigelto/college-search.war /apps/build/college-search/devstaging ', function(err, stream){
-        callback(err);
+    function (message, callback){
+      io.sockets.emit('statusMessage', 'Getting devstaging file information......');
+      var file = null;
+      client.exec("ls -ltr /apps/build/college-search/devstaging", function(err, stream){
+
+        if(err){
+          callback(err);
+                }
+
+        stream.on('data', function(data) {
+          file = data.toString();
+          client.end();
+          callback(err,file);
+        });
       });
     }],
     function(err, message){
@@ -107,23 +145,22 @@ app.post('/api/deploy', function(req, res){
       if(err){
         return res.status(500).send({message:message});
       }
-      return res.status(200).send({message:"Build Successful"});
+      return res.status(200).send({message:"Deployed successfuly", fileOnServer: message});
     });
   });
 
   app.get('/api/deploys', function(req, res){
 
     Deploy
-      .find()
-      .sort('-time')
-      .exec(function(err, deploys) {
-        if(err){
-          console.log(err);
-          return res.status(500).send({message:'error'});
-        }
-        return res.send(deploys);
-      });
+    .find()
+    .sort('time')
+    .exec(function(err, deploys) {
+      if(err){
+        return res.status(500).send({message:'error'});
+      }
+      return res.send(deploys);
     });
+  });
 
   app.use(function(req, res) {
     Router.run(routes, req.path, function(Handler) {
