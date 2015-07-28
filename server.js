@@ -86,7 +86,7 @@ app.post('/api/deploy', function(req, res){
     function(message, callback){
       io.sockets.emit('statusMessage', 'Copying file from home directoy to devstaging......');
       var location = "cp /home/" + username +"/" + appName + ".war /apps/build/" + appName + "/devstaging\n"
-      client.exec('sudo su - jboss', {pty: true}, function(err, stream){
+      client.exec('sudo su - jboss', {end:false, pty: true}, function(err, stream){
 
         if(err){
           callback(err)
@@ -117,16 +117,17 @@ app.post('/api/deploy', function(req, res){
 
         if(err){
           callback(err);
-                }
+        }
 
         stream.on('data', function(data) {
           file = data.toString();
-          client.end();
           callback(err,file);
         });
       });
     }],
     function(err, message){
+
+      client.end();
 
       var deployRecord = new Deploy({
         deployId: uuid.v4(),
@@ -139,13 +140,13 @@ app.post('/api/deploy', function(req, res){
       });
       deployRecord.save(function(err){
         if(err){
-          return res.status(500).send({message:"Could not save record to DB. Deploy Successful."});
+          return res.status(500).send({message:"Could not save record to DB."});
         }
       });
       if(err){
         return res.status(500).send({message:message});
       }
-      return res.status(200).send({message:"Deployed successfuly", fileOnServer: message});
+      return res.status(200).send({message:"War deployed successfully. Please veryify that " + message + " is the correct war to be deployed."});
     });
   });
 
