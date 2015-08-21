@@ -1,11 +1,6 @@
 import React from 'react';
 
-class CollegeTypePage extends React.Component{
-
-  constructor(props){
-    super(props);
-
-  }
+class CollegeTypeContainer extends React.Component{
 
   render(){
     return(
@@ -18,3 +13,5 @@ class CollegeTypePage extends React.Component{
     )
   }
 }
+
+export default CollegeTypeContainer;

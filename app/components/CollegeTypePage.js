@@ -1,5 +1,6 @@
 import React from 'react/addons';
-import StepTabsContainer from './StepTabsContainer'
+import StepTabsContainer from './StepTabsContainer';
+import CollegeTypeContainer from './CollegeTypeContainer';
 
 class CollegeTypePage extends React.Component{
 
