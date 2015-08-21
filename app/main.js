@@ -3,7 +3,7 @@ import Router from 'react-router';
 import routes from './routes';
 
 Router.run(routes, Router.HistoryLocation, function(Handler) {
-  React.render(<Handler />, document.getElementById('app'));
+  React.render(<Handler />, document.getElementById('appStartPoint'));
 });
 
 /*Note that <Route/> components are not ever rendered,

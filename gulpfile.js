@@ -29,13 +29,12 @@ var dependencies = [
  */
 gulp.task('vendor', function() {
   return gulp.src([
+    'bower_components/webcomponentsjs/webcomponents.js',
     'bower_components/jquery/dist/jquery.js',
-    'bower_components/bootstrap/dist/js/bootstrap.js',
-    'bower_components/magnific-popup/dist/jquery.magnific-popup.js',
-    'bower_components/toastr/toastr.js'
+    'bower_components/bootstrap/dist/js/bootstrap.js'
   ]).pipe(concat('vendor.js'))
     .pipe(gulpif(production, uglify({ mangle: false })))
-    .pipe(gulp.dest('public/js'));
+    .pipe(gulp.dest('/Users/veigelto/JavaDev/workspaces/sourcetree/fresh-college-search/grails-app/assets/javascripts'));
 });
 
 /*
@@ -49,22 +48,27 @@ gulp.task('browserify-vendor', function() {
     .bundle()
     .pipe(source('vendor.bundle.js'))
     .pipe(gulpif(production, streamify(uglify({ mangle: false }))))
-    .pipe(gulp.dest('public/js'));
+    .pipe(gulp.dest('/Users/veigelto/JavaDev/workspaces/sourcetree/fresh-college-search/grails-app/assets/javascripts'));
 });
 
 /*
  |--------------------------------------------------------------------------
  | Compile only project files, excluding all third-party dependencies.
  |--------------------------------------------------------------------------
+ Browserify works by walking the require() statements in your code to build
+ up a dependency tree and then generates a bundle containing all those dependencies.
  */
 gulp.task('browserify', ['browserify-vendor'], function() {
   return browserify('app/main.js')
     .external(dependencies)
+    /*
+    external = dont contain any requires
+    */
     .transform(babelify)
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(gulpif(production, streamify(uglify({ mangle: false }))))
-    .pipe(gulp.dest('public/js'));
+    .pipe(gulp.dest('/Users/veigelto/JavaDev/workspaces/sourcetree/fresh-college-search/grails-app/assets/javascripts'));
 });
 
 /*
@@ -89,7 +93,7 @@ gulp.task('browserify-watch', ['browserify-vendor'], function() {
         gutil.log(gutil.colors.green('Finished rebundling in', (Date.now() - start) + 'ms.'));
       })
       .pipe(source('bundle.js'))
-      .pipe(gulp.dest('public/js/'));
+      .pipe(gulp.dest('/Users/veigelto/JavaDev/workspaces/sourcetree/fresh-college-search/grails-app/assets/javascripts'));
   }
 });
 
@@ -99,12 +103,13 @@ gulp.task('browserify-watch', ['browserify-vendor'], function() {
  |--------------------------------------------------------------------------
  */
 gulp.task('styles', function() {
-  return gulp.src('app/stylesheets/main.less')
+  return gulp.src(['app/stylesheets/main.less', 'app/stylesheets/stepByStep.css'])
     .pipe(plumber())
     .pipe(less())
     .pipe(autoprefixer())
+    .pipe(concat('main.css'))
     .pipe(gulpif(production, cssmin()))
-    .pipe(gulp.dest('public/css'));
+    .pipe(gulp.dest('/Users/veigelto/JavaDev/workspaces/sourcetree/fresh-college-search/grails-app/assets/css'));
 });
 
 gulp.task('watch', function() {
