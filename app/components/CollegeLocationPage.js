@@ -1,19 +1,17 @@
 import React from 'react/addons';
 import StepTabsContainer from './StepTabsContainer';
-import CollegeTypeContainer from './CollegeTypeContainer';
+import CollegeLocationContainer from './CollegeLocationContainer';
 
-class CollegeTypePage extends React.Component{
+class CollegeLocationPage extends React.Component{
 
   render(){
     return(
-
       <div className="type_container">
         <StepTabsContainer/>
-        <CollegeTypeContainer/>
+        <CollegeLocationContainer/>
       </div>
-
     )
   }
 }
 
-export default CollegeTypePage;
+export default CollegeLocationPage;

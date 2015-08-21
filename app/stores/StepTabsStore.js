@@ -7,8 +7,9 @@ class SetTabsStore {
   constructor(){
 
     this.bindActions(StepTabsActions);
-    this.steps = [{name:'College Type', link:'', style:'doing'},
+    this.steps = [{name:'Start', link:'', style:'doing'},
                   {name:'Location', link:'', style:'todo'},
+                  {name:'College Type', link:'', style:'todo'},
                   {name:'Cost', link:'', style:'todo'},
                   {name:'Award', link:'', style:'todo'},
                   {name:'Program', link:'', style:'todo'}];

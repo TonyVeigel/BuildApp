@@ -32,7 +32,7 @@ class LogoContainer extends React.Component{
 
     let logos = this.state.campuses.map((campus) =>{
       return(
-          <Logo key={campus.campusId} campusId={campus.campusId}/>
+          <Logo key={campus.campusId} campusId={campus.campusId} rcId={campus.rcId}/>
       )
     });
 

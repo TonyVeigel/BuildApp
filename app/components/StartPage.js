@@ -1,9 +1,7 @@
-import React from 'react/addons';
+import React from 'react';
 import LogoContainer from './LogoContainer';
 import StartHeader from './StartHeader';
-
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-
+import {Link} from 'react-router';
 
 class StartPage extends React.Component{
 
@@ -18,9 +16,9 @@ class StartPage extends React.Component{
     return(
 
       <div className="container">
-        <StartHeader/>
-        <LogoContainer url={this.state.campusIdsUrl}/>
-      </div>
+          <StartHeader/>
+          <LogoContainer url={this.state.campusIdsUrl}/>
+    </div>
 
     )
   }

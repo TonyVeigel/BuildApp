@@ -7,6 +7,11 @@
   border-bottom: 1px #ddd solid;
 }
 
+.stepByStep_link{
+    font-size: 25px;
+
+}
+
 .type_container{
     width: 80%;
     text-align: center;
