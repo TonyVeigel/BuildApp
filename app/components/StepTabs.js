@@ -1,5 +1,6 @@
 import React from 'react';
 import SetTabsStore from '../stores/StepTabsStore';
+import {Link} from 'react-router';
 
 class StepTabs extends React.Component{
 
@@ -12,16 +13,19 @@ class StepTabs extends React.Component{
 
   render(){
     return(
+      <div>
         <ol className="progtrckr">{
               this.props.steps.map((s, i) =>
-                <li value={i} key={i}
-                              className={"progtrckr-" + s.style}
-                              onClick={this.handleOnClick}>
+              <Link to={s.link} key={i}>
+                <li value={i} className={"progtrckr-" + s.style}
+                    onClick={this.handleOnClick}>
                   <em>{i+1}</em>
                   <span>{s.name}</span>
                 </li>
+                </Link>
               )}
           </ol>
+      </div>
     )
   }
 }

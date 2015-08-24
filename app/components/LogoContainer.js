@@ -38,7 +38,7 @@ class LogoContainer extends React.Component{
 
     return(
       <div className="row">
-        <div className="column">
+        <div className="col-md-12">
           <div className="logo_container">
             {logos}
           </div>

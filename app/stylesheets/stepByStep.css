@@ -1,20 +1,45 @@
+.criteria-answer{
+  color: #FF0000;
+}
+
+.instant_review_container{
+  text-align: center;
+  margin-top: 90px;
+  color: #33C3F0;
+  border-bottom: 1px dotted #ddd;
+  margin-right: 15px;
+}
+
 .start_header{
   font-family: serif;
   text-align: center;
-  margin-top: 70px;
+  margin-top: 75px;
   font-size: 65px;
   color: #000000;
+  line-height: 60px;
+}
+
+.start_sub_header{
   border-bottom: 1px #ddd solid;
+  text-align: center;
+  padding-bottom: 10px;
 }
 
 .stepByStep_link{
-    font-size: 25px;
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+.college_location_container{
+  margin-bottom: 50px;
 
 }
 
-.type_container{
-    width: 80%;
-    text-align: center;
+a.btn-no-decoration {
+
+  color: white;
+  text-decoration: none;
+
 }
 
 .logo_container{

@@ -1,9 +1,9 @@
 import React from 'react';
 import LogoContainer from './LogoContainer';
-import StartHeader from './StartHeader';
+import WelcomeHeader from './WelcomeHeader';
 import {Link} from 'react-router';
 
-class StartPage extends React.Component{
+class WelcomePage extends React.Component{
 
   constructor(props){
     super(props);
@@ -16,7 +16,7 @@ class StartPage extends React.Component{
     return(
 
       <div className="container">
-          <StartHeader/>
+          <WelcomeHeader/>
           <LogoContainer url={this.state.campusIdsUrl}/>
     </div>
 
@@ -24,4 +24,4 @@ class StartPage extends React.Component{
   }
 }
 
-export default StartPage;
+export default WelcomePage;

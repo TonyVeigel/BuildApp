@@ -23,8 +23,10 @@ class StepTabsContainer extends React.Component{
 
   render(){
     return(
-      <div className="progtckr_container">
-        <StepTabs steps={this.state.steps}/>
+      <div className="col-md-10 col-md-offset-2">
+        <div className="progtckr_container">
+          <StepTabs steps={this.state.steps}/>
+        </div>
       </div>
     )
   }
