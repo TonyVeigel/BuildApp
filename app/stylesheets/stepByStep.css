@@ -67,6 +67,7 @@ a.btn-no-decoration {
 
 ol.progtrckr {
   margin: 0;
+  padding-left: 0;
   padding-bottom: 2.2rem;
   list-style-type: none;
 }

@@ -6,8 +6,8 @@ class DataStore {
 
   constructor(){
     this.bindActions(DataStoreActions);
-    this.radius = '';
-    this.zipCode = '';
+    this.radius = 'No Preference';
+    this.zipCode = 'No Preference';
   }
   onUpdateRadius(event){
     this.radius = event.target.value;

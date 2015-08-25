@@ -29,7 +29,7 @@ class InstantReview extends React.Component{
         </div>
         <h4><Link to="/college-search/location">Location</Link></h4>
         <ul>
-          <li>Raidus : <span className="criteria-answer">{this.state.radius ? this.state.radius + ' miles' : ''}</span></li>
+          <li>Raidus : <span className="criteria-answer">{this.state.radius ? this.state.radius + ' miles' : this.state.radius}</span></li>
           <li>ZIP Code : <span className="criteria-answer">{this.state.zipCode}</span></li>
         </ul>
       </div>
