@@ -7,9 +7,6 @@ class WelcomePage extends React.Component{
 
   constructor(props){
     super(props);
-    this.state = {
-      campusIdsUrl: "/college-search/public/services/institution/list"
-    };
   }
 
   render(){
@@ -17,8 +14,8 @@ class WelcomePage extends React.Component{
 
       <div className="container">
           <WelcomeHeader/>
-          <LogoContainer url={this.state.campusIdsUrl}/>
-    </div>
+          <LogoContainer/>
+        </div>
 
     )
   }

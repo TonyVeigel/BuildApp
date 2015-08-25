@@ -6,14 +6,13 @@ class LogoContainer extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      campuses: [],
-      url: this.props.url
+      campuses: []
     };
   }
 
   loadCampusIdsFromServer() {
     $.ajax({
-      url: this.state.url,
+      url:"/college-search/public/services/institution/list",
       dataType: 'json',
       success: (data) => {
         this.setState({campuses: data});

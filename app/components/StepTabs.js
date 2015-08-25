@@ -6,9 +6,6 @@ class StepTabs extends React.Component{
 
   constructor(props){
     super(props);
-    this.state = {
-      steps: props.steps
-    }
   }
 
   render(){
