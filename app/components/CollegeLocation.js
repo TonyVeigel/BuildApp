@@ -1,27 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router'
-import DataStore from '../stores/DataStore';
 import DataStoreActions from '../actions/DataStoreActions';
 import InstantReview from './InstantReview';
 
-class CollegeLocationContainer extends React.Component{
+class CollegeLocation extends React.Component{
 
   constructor(props){
     super(props);
-    this.state = DataStore.getState();
-    this.onChange = this.onChange.bind(this);
-  }
-
-  componentDidMount(){
-    DataStore.listen(this.onChange);
-  }
-
-  componentWillUnmount(){
-    DataStore.unlisten(this.onChange);
-  }
-
-  onChange(state){
-    this.setState(state);
   }
 
   render(){
@@ -36,7 +21,7 @@ class CollegeLocationContainer extends React.Component{
             <div className="row">
               <div className="col-md-4">
                 <label>Search within</label>
-                <select value={this.state.radius} className="form-control"
+                <select value={this.props.radius} className="form-control"
                   onChange={DataStoreActions.updateRadius} >
                 <option value="np">No Preference</option>
                 <option value="10">10</option>
@@ -52,7 +37,7 @@ class CollegeLocationContainer extends React.Component{
 
               <div className="col-md-4">
                 <label>miles from</label>
-                <input onChange={DataStoreActions.updateZipCode} value={this.state.miles} className="form-control" type="text" maxLength="7" placeholder="Zip/Postal Code"/>
+                <input onChange={DataStoreActions.updateZipCode} value={this.props.miles} className="form-control" type="text" maxLength="7" placeholder="Zip/Postal Code"/>
               </div>
             </div>
 
@@ -67,4 +52,4 @@ class CollegeLocationContainer extends React.Component{
   }
 }
 
-export default CollegeLocationContainer;
+export default CollegeLocation;
