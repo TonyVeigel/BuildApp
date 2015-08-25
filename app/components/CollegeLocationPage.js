@@ -2,6 +2,7 @@ import React from 'react';
 import StepTabsContainer from './StepTabsContainer';
 import CollegeLocation from './CollegeLocation';
 import DataStore from '../stores/DataStore';
+import StepTabsActions from '../actions/StepTabsActions';
 
 class CollegeLocationPage extends React.Component{
 
@@ -12,6 +13,13 @@ class CollegeLocationPage extends React.Component{
   }
 
   componentDidMount(){
+    StepTabsActions.updateSteps(
+      {name:'Location', link:'/college-search/location', style:'doing'},
+      {name:'Cost', link:'/college-search/cost', style:'todo'},
+      {name:'Award', link:'/college-search/award', style:'todo'},
+      {name:'Program', link:'/college-search/program', style:'todo'},
+      {name:'Delivery', link:'/college-search/degree', style:'todo'}
+    )
     DataStore.listen(this.onChange);
   }
 
@@ -25,9 +33,11 @@ class CollegeLocationPage extends React.Component{
 
   render(){
     return(
-      <div className="col-md-9 col-md-offset-2">
-        <div className="college_location_container">
-          <CollegeLocation radius={this.state.radius} miles=={this.state.miles}/>
+      <div className="row">
+        <div className="col-md-12 ">
+          <div className="college_location_container">
+            <CollegeLocation radius={this.state.radius} zipCode={this.state.zipCode}/>
+          </div>
         </div>
       </div>
     )

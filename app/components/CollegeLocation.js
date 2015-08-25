@@ -5,18 +5,19 @@ import InstantReview from './InstantReview';
 
 class CollegeLocation extends React.Component{
 
-  constructor(props){
-    super(props);
-  }
-
   render(){
+
     return(
-      <div>
-            <h2>Location</h2>
-            <p>Minnesota State Colleges and Universities is a system of 31 public colleges and universities with 54
-               campuses in 47 communities throughout the state of Minnesota. By setting a distance you can limit the
-               the number of institutions returned in the search results.
-            </p>
+        <div>
+            <div className="row">
+              <div className="col-md-12">
+              <h2>Location</h2>
+              <p>Minnesota State Colleges and Universities is a system of 31 public colleges and universities with 54
+                 campuses in 47 communities throughout the state of Minnesota. By setting a distance you can limit the
+                 the number of institutions returned in the search results.
+              </p>
+            </div>
+          </div>
             <br/>
             <div className="row">
               <div className="col-md-4">
@@ -37,17 +38,21 @@ class CollegeLocation extends React.Component{
 
               <div className="col-md-4">
                 <label>miles from</label>
-                <input onChange={DataStoreActions.updateZipCode} value={this.props.miles} className="form-control" type="text" maxLength="7" placeholder="Zip/Postal Code"/>
+                <input onChange={DataStoreActions.updateZipCode} value={this.props.zipCode} className="form-control" type="text" maxLength="7" placeholder="Zip/Postal Code"/>
               </div>
             </div>
 
+            <br/>
             <div className="row">
-              <br/>
-              <div className="btn btn-success pull-right">
-                <Link className="btn-no-decoration" to="/college-search/cost">Cost -></Link>
-            </div>
+              <div className="col-md-12">
+              <Link className="btn-no-decoration" to="/college-search/cost">
+                <div className="btn btn-success pull-right">
+                Cost &rarr;
+                </div>
+              </Link>
           </div>
-      </div>
+          </div>
+        </div>
     )
   }
 }

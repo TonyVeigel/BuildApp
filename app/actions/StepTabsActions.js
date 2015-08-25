@@ -8,9 +8,6 @@ class StepTabsActions{
     );
   }
 
-    updateSteps(steps){
-       this.actions.updateSteps(steps);
-    }
   }
 
   export default alt.createActions(StepTabsActions);

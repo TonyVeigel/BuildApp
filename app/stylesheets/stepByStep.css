@@ -1,13 +1,16 @@
+.criteria_sub_heading{
+  font-size: 13px;
+}
+
 .criteria-answer{
-  color: #FF0000;
+  color: #179C17;
 }
 
 .instant_review_container{
-  text-align: center;
-  margin-top: 90px;
-  color: #33C3F0;
+  margin-top: 85px;
   border-bottom: 1px dotted #ddd;
   margin-right: 15px;
+  font-size: 24px;
 }
 
 .start_header{
@@ -30,7 +33,16 @@
     padding-left: 10px;
 }
 
+.college_award_container{
+  margin-bottom: 50px;
+}
+
 .college_location_container{
+  margin-bottom: 50px;
+
+}
+
+.college_cost_container{
   margin-bottom: 50px;
 
 }

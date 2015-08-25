@@ -26,11 +26,20 @@ class InstantReview extends React.Component{
     return(
       <div>
         <div className="instant_review_container">
+          Review
         </div>
-        <h4><Link to="/college-search/location">Location</Link></h4>
+        <h5><Link to="/college-search/location">Location</Link></h5>
         <ul>
-          <li>Raidus : <span className="criteria-answer">{this.state.radius ? this.state.radius + ' miles' : this.state.radius}</span></li>
-          <li>ZIP Code : <span className="criteria-answer">{this.state.zipCode}</span></li>
+          <li className="criteria_sub_heading">Raidus :<span className="criteria-answer">{this.state.radius ? this.state.radius + ' miles' : 'No Preference'}</span></li>
+          <li className="criteria_sub_heading">ZIP Code : <span className="criteria-answer">{this.state.zipCode ? this.state.zipCode : 'No Preference'}</span></li>
+        </ul>
+        <h5><Link to="/college-search/cost">Cost</Link></h5>
+        <ul>
+          <li className="criteria_sub_heading">Total Cost : <span className="criteria-answer">{this.state.cost ? '$' + this.state.cost : 'No Preference'}</span></li>
+        </ul>
+        <h5><Link to="/college-search/award">Award</Link></h5>
+        <ul>
+          <li className="criteria_sub_heading">Award/Degree : <span className="criteria-answer">{this.state.awardDescription ? this.state.awardDescription : 'No Preference'}</span></li>
         </ul>
       </div>
     )

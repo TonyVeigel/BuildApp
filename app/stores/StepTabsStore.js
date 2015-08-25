@@ -10,8 +10,9 @@ class SetTabsStore {
     this.steps = [
                   {name:'Location', link:'/college-search/location', style:'doing'},
                   {name:'Cost', link:'/college-search/cost', style:'todo'},
-                  {name:'Award', link:'/college-search/location', style:'todo'},
-                  {name:'Program', link:'/college-search/location', style:'todo'}
+                  {name:'Award', link:'/college-search/award', style:'todo'},
+                  {name:'Program', link:'/college-search/program', style:'todo'},
+                  {name:'Delivery', link:'/college-search/degree', style:'todo'}
                 ];
   }
   onUpdateSteps(steps){

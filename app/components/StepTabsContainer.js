@@ -7,6 +7,7 @@ class StepTabsContainer extends React.Component{
   constructor(props){
     super(props);
     this.state = StepTabsStore.getState();
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount(){
@@ -23,9 +24,11 @@ class StepTabsContainer extends React.Component{
 
   render(){
     return(
-      <div className="col-md-10 col-md-offset-2">
-        <div className="progtckr_container">
-          <StepTabs steps={this.state.steps}/>
+      <div className="row">
+        <div className="col-md-12">
+          <div className="progtckr_container">
+            <StepTabs steps={this.state.steps}/>
+          </div>
         </div>
       </div>
     )

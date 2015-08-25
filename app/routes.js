@@ -5,6 +5,7 @@ import WelcomePage from './components/WelcomePage';
 import CollegeLocationPage from './components/CollegeLocationPage';
 import CollegeCostPage from './components/CollegeCostPage';
 import StepByStep from './components/StepByStep';
+import CollegeAwardPage from './components/CollegeAwardPage';
 
 export default (
   <Route path="/college-search" handler={App}>
@@ -12,6 +13,7 @@ export default (
     <Route path='start' handler={StepByStep}>
       <Route path="/college-search/location" handler={CollegeLocationPage}/>
       <Route path="/college-search/cost" handler={CollegeCostPage}/>
+      <Route path="/college-search/award" handler={CollegeAwardPage}/>
     </Route>
   </Route>
 );

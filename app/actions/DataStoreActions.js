@@ -5,7 +5,10 @@ class DataStoreActions{
   constructor(){
     this.generateActions(
       'updateRadius',
-      'updateZipCode'
+      'updateZipCode',
+      'updateLocation',
+      'updateCost',
+      'updateAward'
     );
   }
 

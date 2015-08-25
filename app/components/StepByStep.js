@@ -9,11 +9,11 @@ class StepByStep extends React.Component{
 
     return(
         <div className="row">
-          <div className="col-md-9">
+          <div className="col-sm-8">
             <StepTabsContainer/>
             <RouteHandler/>
           </div>
-          <div className="col-md-3">
+          <div className="col-sm-4">
             <InstantReview/>
           </div>
       </div>

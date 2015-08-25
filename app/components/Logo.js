@@ -13,7 +13,7 @@ class Logo extends React.Component {
 
     return(
       <a href={hrefPath}>
-        <img className="campus_logo" height="65px;" src={imagePath}/>
+        <img className="campus_logo" height="55px;" src={imagePath}/>
       </a>
   )
   }
