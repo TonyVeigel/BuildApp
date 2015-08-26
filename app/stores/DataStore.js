@@ -11,6 +11,12 @@ class DataStore {
     this.cost = '';
     this.award = '';
     this.awardDescription = '';
+    this.category = '';
+    this.categoryDescription = '';
+    this.subcategory = '';
+    this.subcategoryDescription = '';
+    this.delivery = '';
+    this.deliveryDescription = '';
   }
   onUpdateRadius(event){
     this.radius = event.target.value;
@@ -24,6 +30,18 @@ class DataStore {
   onUpdateAward(event){
     this.award = event.target.value;
     this.awardDescription = event.target.selectedOptions[0].text;
+  }
+  onUpdateCategory(event){
+    this.category = event.target.value;
+    this.categoryDescription = event.target.selectedOptions[0].text;
+  }
+  onUpdateSubcategory(event){
+    this.subcategory = event.target.value;
+    this.subcategoryDescription = event.target.selectedOptions[0].text;
+  }
+  onUpdateDelivery(event){
+    this.delivery = event.target.value;
+    this.deliveryDescription = event.target.selectedOptions[0].text;
   }
 }
 

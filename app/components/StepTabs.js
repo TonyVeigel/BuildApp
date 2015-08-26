@@ -1,12 +1,7 @@
 import React from 'react';
-import SetTabsStore from '../stores/StepTabsStore';
 import {Link} from 'react-router';
 
 class StepTabs extends React.Component{
-
-  constructor(props){
-    super(props);
-  }
 
   render(){
     return(

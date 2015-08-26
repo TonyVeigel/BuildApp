@@ -6,14 +6,18 @@ import CollegeLocationPage from './components/CollegeLocationPage';
 import CollegeCostPage from './components/CollegeCostPage';
 import StepByStep from './components/StepByStep';
 import CollegeAwardPage from './components/CollegeAwardPage';
+import CollegeProgramPage from './components/CollegeProgramPage';
+import CollegeSearchPage from './components/CollegeSearchPage';
 
 export default (
-  <Route path="/college-search" handler={App}>
+  <Route path="/college-search/guide/" handler={App}>
     <Route path='begin' handler={WelcomePage}/>
     <Route path='start' handler={StepByStep}>
-      <Route path="/college-search/location" handler={CollegeLocationPage}/>
-      <Route path="/college-search/cost" handler={CollegeCostPage}/>
-      <Route path="/college-search/award" handler={CollegeAwardPage}/>
+      <Route path="/college-search/guide/location" handler={CollegeLocationPage}/>
+      <Route path="/college-search/guide/cost" handler={CollegeCostPage}/>
+      <Route path="/college-search/guide/award" handler={CollegeAwardPage}/>
+      <Route path="/college-search/guide/program" handler={CollegeProgramPage}/>
+      <Route path="/college-search/guide/search" handler={CollegeSearchPage}/>
     </Route>
   </Route>
 );

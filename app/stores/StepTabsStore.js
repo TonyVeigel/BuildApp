@@ -8,15 +8,18 @@ class SetTabsStore {
 
     this.bindActions(StepTabsActions);
     this.steps = [
-                  {name:'Location', link:'/college-search/location', style:'doing'},
-                  {name:'Cost', link:'/college-search/cost', style:'todo'},
-                  {name:'Award', link:'/college-search/award', style:'todo'},
-                  {name:'Program', link:'/college-search/program', style:'todo'},
-                  {name:'Delivery', link:'/college-search/degree', style:'todo'}
+                  {name:'Location', link:'/college-search/guide/location', style:'doing'},
+                  {name:'Cost', link:'/college-search/guide/cost', style:'todo'},
+                  {name:'Award', link:'/college-search/guide/award', style:'todo'},
+                  {name:'Program', link:'/college-search/guide/program', style:'todo'},
+                  {name:'Search', link:'/college-search/guide/search', style:'todo'}
                 ];
   }
+
   onUpdateSteps(steps){
-    this.steps = steps;
+    this.steps.forEach( function (element, i){
+      element.style = steps[i].style
+    })
   }
 
 }

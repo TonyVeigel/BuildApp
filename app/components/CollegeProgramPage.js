@@ -1,25 +1,27 @@
 import React from 'react';
 import StepTabsActions from '../actions/StepTabsActions';
+import CollegeProgram from './CollegeProgram';
 import DataStore from '../stores/DataStore';
-import CollegeAward from './CollegeAward';
 
-class CollegeAwardPage extends React.Component{
+class CollegeProgramPage extends React.Component{
 
   constructor(props){
     super(props);
+    let storeData = DataStore.getState();
     this.state = {
-        awardList: [],
-        award: DataStore.getState().award
+      categoryList: [],
+      category: storeData.category,
+      delivery: storeData.delivery
     }
     this.onChange = this.onChange.bind(this);
   }
 
-  loadAwardsFromServer() {
+  loadCategoriesFromServer() {
     $.ajax({
-      url:"/college-search/public/services/degree/list",
+      url:"/college-search/public/services/category/list",
       dataType: 'json',
       success: (data) => {
-        this.setState({awardList: data});
+        this.setState({categoryList: data});
       },
       error: (xhr, status, err) => {
         console.error(status, err);
@@ -31,12 +33,12 @@ class CollegeAwardPage extends React.Component{
     StepTabsActions.updateSteps(
       {style:'done'},
       {style:'done'},
+      {style:'done'},
       {style:'doing'},
-      {style:'todo'},
       {style:'todo'}
     )
     DataStore.listen(this.onChange);
-    this.loadAwardsFromServer();
+    this.loadCategoriesFromServer();
   }
 
   componentWillUnmount(){
@@ -51,8 +53,8 @@ class CollegeAwardPage extends React.Component{
     return(
       <div className="row">
         <div className="col-md-12">
-          <div className="college_award_container">
-            <CollegeAward awardList={this.state.awardList} award={this.state.award}/>
+          <div className="college_program_container">
+            <CollegeProgram delivery={this.state.delivery} categoryList={this.state.categoryList} category={this.state.category}/>
           </div>
         </div>
       </div>
@@ -60,4 +62,4 @@ class CollegeAwardPage extends React.Component{
   }
 }
 
-export default CollegeAwardPage;
+export default CollegeProgramPage;

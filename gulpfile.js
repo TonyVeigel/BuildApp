@@ -18,8 +18,7 @@ var production = process.env.NODE_ENV === 'production';
 var dependencies = [
   'alt',
   'react',
-  'react-router',
-  'underscore'
+  'react-router'
 ];
 
 /*

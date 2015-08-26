@@ -14,11 +14,11 @@ class CollegeLocationPage extends React.Component{
 
   componentDidMount(){
     StepTabsActions.updateSteps(
-      {name:'Location', link:'/college-search/location', style:'doing'},
-      {name:'Cost', link:'/college-search/cost', style:'todo'},
-      {name:'Award', link:'/college-search/award', style:'todo'},
-      {name:'Program', link:'/college-search/program', style:'todo'},
-      {name:'Delivery', link:'/college-search/degree', style:'todo'}
+      {style:'doing'},
+      {style:'todo'},
+      {style:'todo'},
+      {style:'todo'},
+      {style:'todo'}
     )
     DataStore.listen(this.onChange);
   }

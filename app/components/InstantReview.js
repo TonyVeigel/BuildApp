@@ -23,23 +23,38 @@ class InstantReview extends React.Component{
   }
 
   render(){
+
+    let totalCost;
+    if(this.state.cost >= 5000){
+      totalCost = '$' + this.state.cost;
+    }else if(this.state.cost){
+      totalCost = '$5000';
+    }else{
+      totalCost = 'No Preference';
+    }
+
     return(
       <div>
         <div className="instant_review_container">
           Review
         </div>
-        <h5><Link to="/college-search/location">Location</Link></h5>
+        <h5><Link className="link-no-decoration" to="/college-search/guide/location">Location</Link></h5>
         <ul>
-          <li className="criteria_sub_heading">Raidus :<span className="criteria-answer">{this.state.radius ? this.state.radius + ' miles' : 'No Preference'}</span></li>
-          <li className="criteria_sub_heading">ZIP Code : <span className="criteria-answer">{this.state.zipCode ? this.state.zipCode : 'No Preference'}</span></li>
+          <li className="criteria_sub_heading">Raidus <br/><span className="criteria-answer">{this.state.radius ? this.state.radius + ' miles' : 'No Preference'}</span></li>
+          <li className="criteria_sub_heading">ZIP Code <br/><span className="criteria-answer">{this.state.zipCode ? this.state.zipCode : 'No Preference'}</span></li>
         </ul>
-        <h5><Link to="/college-search/cost">Cost</Link></h5>
+        <h5><Link className="link-no-decoration" to="/college-search/guide/cost">Cost</Link></h5>
         <ul>
-          <li className="criteria_sub_heading">Total Cost : <span className="criteria-answer">{this.state.cost ? '$' + this.state.cost : 'No Preference'}</span></li>
+          <li className="criteria_sub_heading">Total Cost <br/> <span className="criteria-answer">{totalCost}</span></li>
         </ul>
-        <h5><Link to="/college-search/award">Award</Link></h5>
+        <h5><Link className="link-no-decoration" to="/college-search/guide/award">Award</Link></h5>
         <ul>
-          <li className="criteria_sub_heading">Award/Degree : <span className="criteria-answer">{this.state.awardDescription ? this.state.awardDescription : 'No Preference'}</span></li>
+          <li className="criteria_sub_heading">Award/Degree <br/> <span className="criteria-answer">{this.state.awardDescription ? this.state.awardDescription : 'No Preference'}</span></li>
+        </ul>
+        <h5><Link className="link-no-decoration" to="/college-search/guide/program">Program</Link></h5>
+        <ul>
+          <li className="criteria_sub_heading">Program <br/><span className="criteria-answer">{this.state.categoryDescription ? this.state.categoryDescription : 'No Preference'}</span></li>
+          <li className="criteria_sub_heading">Delivery <br/><span className="criteria-answer">{this.state.deliveryDescription ? this.state.deliveryDescription : 'No Preference'}</span></li>
         </ul>
       </div>
     )

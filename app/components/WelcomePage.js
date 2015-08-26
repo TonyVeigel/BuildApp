@@ -11,12 +11,10 @@ class WelcomePage extends React.Component{
 
   render(){
     return(
-
       <div className="container">
-          <WelcomeHeader/>
-          <LogoContainer/>
-        </div>
-
+        <WelcomeHeader/>
+        <LogoContainer/>
+      </div>
     )
   }
 }

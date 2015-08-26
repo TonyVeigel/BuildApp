@@ -1,3 +1,9 @@
+.main_container{
+
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
 .criteria_sub_heading{
   font-size: 13px;
 }
@@ -31,6 +37,10 @@
 .stepByStep_link{
     font-size: 18px;
     padding-left: 10px;
+}
+
+.college_program_container{
+    margin-bottom: 50px;
 }
 
 .college_award_container{

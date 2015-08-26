@@ -8,7 +8,10 @@ class DataStoreActions{
       'updateZipCode',
       'updateLocation',
       'updateCost',
-      'updateAward'
+      'updateAward',
+      'updateCategory',
+      'updateSubcategory',
+      'updateDelivery'
     );
   }
 

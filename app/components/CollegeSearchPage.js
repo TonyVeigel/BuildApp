@@ -1,23 +1,22 @@
 import React from 'react';
 import StepTabsActions from '../actions/StepTabsActions';
-import CollegeCost from './CollegeCost';
+import CollegeSearch from './CollegeSearch';
 import DataStore from '../stores/DataStore';
 
-class CollegeCostPage extends React.Component{
+class CollegeSearchPage extends React.Component{
 
   constructor(props){
     super(props);
     this.state = DataStore.getState();
-    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount(){
     StepTabsActions.updateSteps(
       {style:'done'},
-      {style:'doing'},
-      {style:'todo'},
-      {style:'todo'},
-      {style:'todo'}
+      {style:'done'},
+      {style:'done'},
+      {style:'done'},
+      {style:'done'}
     )
     DataStore.listen(this.onChange);
   }
@@ -34,8 +33,9 @@ class CollegeCostPage extends React.Component{
     return(
       <div className="row">
         <div className="col-md-12">
-          <div className="college_cost_container">
-            <CollegeCost cost={this.state.cost}/>
+          <div className="college_search_container">
+            <CollegeSearch radius={this.state.radius} zipCode={this.state.zipCode} cost={this.state.cost} award={this.state.award}
+              category={this.state.category} delivery={this.state.delivery}/>
           </div>
         </div>
       </div>
@@ -43,4 +43,4 @@ class CollegeCostPage extends React.Component{
   }
 }
 
-export default CollegeCostPage;
+export default CollegeSearchPage;
