@@ -7,12 +7,8 @@ class CollegeProgramPage extends React.Component{
 
   constructor(props){
     super(props);
-    let storeData = DataStore.getState();
-    this.state = {
-      categoryList: [],
-      category: storeData.category,
-      delivery: storeData.delivery
-    }
+    this.state = DataStore.getState();
+    this.state.categoryList = [];
     this.onChange = this.onChange.bind(this);
   }
 
