@@ -15,7 +15,8 @@ class CollegeSearchExplained extends React.Component{
               the Minnesota State Colleges and Universities offer many choices at a great value.
               <br/>
               <br/>
-              The guided search will ask a series of questions to help you find the colleges that are right for you. If you do not want to
+              <h4>About Guided Search</h4>
+              The guided search will ask a series of questions to help you find the colleges or programs that are right for you. If you do not want to
               answer a given question, simply move on to the next category.
             </p>
             <br/>

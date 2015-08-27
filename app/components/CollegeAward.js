@@ -16,10 +16,18 @@ class CollegeAward extends React.Component{
         <div className="row">
           <div className="col-md-12">
             <h2>Award/Degree</h2>
-            <p>Minnesota State Colleges and Universities is a system of 31 public colleges and universities with 54
-              campuses in 47 communities throughout the state of Minnesota. By setting a distance you can limit the
-              the number of institutions returned in the search results.
+            <p>Minnesota State Colleges and Universities offers many degree options:
             </p>
+            <ul>
+              <li>Certificates: Focus on one discipline and earn a certificate in less than a year.</li>
+              <li>Diploma: </li>
+              <li>Associate: </li>
+              <li>Baccalaureate: </li>
+              <li>Post-Baccalaureate Certificate: </li>
+              <li>Masters: </li>
+              <li>Specialist, Advanced Prof, MFA, JD: </li>
+              <li>Doctorate: </li>
+            </ul>
             <br/>
             <div className="row">
               <div className="col-md-6">
