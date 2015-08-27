@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router'
 import DataStoreActions from '../actions/DataStoreActions';
-import InstantReview from './InstantReview';
 
 class CollegeLocation extends React.Component{
 
@@ -12,9 +11,14 @@ class CollegeLocation extends React.Component{
         <div className="row">
           <div className="col-md-12">
             <h2>Location</h2>
-            <p>Minnesota State Colleges and Universities is a system of 31 public colleges and universities with 54
-              campuses in 47 communities throughout the state of Minnesota. By setting a distance you can limit the
-              the number of institutions returned in the search results.
+
+            <p>
+              Location can be a big factor when choosing a college. When determining how far away
+              you would like to search for colleges, ask yourself some questions such as:
+              <ul>
+                <li>How far away from family would I like to be?</li>
+                <li>Will I be driving home on weekends?</li>
+              </ul>
             </p>
           </div>
         </div>
@@ -46,6 +50,11 @@ class CollegeLocation extends React.Component{
             <Link className="btn-no-decoration" to="/college-search/guide/cost">
               <div className="btn btn-success pull-right">
                 Cost &rarr;
+              </div>
+            </Link>
+            <Link className="btn-no-decoration" to="/college-search/guide/explained">
+              <div className="btn btn-success pull-left">
+                &larr; Start
               </div>
             </Link>
           </div>

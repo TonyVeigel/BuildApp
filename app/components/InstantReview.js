@@ -1,34 +1,15 @@
 import React from 'react';
-import DataStore from '../stores/DataStore';
 import {Link} from 'react-router';
 
 class InstantReview extends React.Component{
 
-  constructor(props){
-    super(props);
-    this.state = DataStore.getState();
-    this.onChange = this.onChange.bind(this);
-  }
-
-  componentDidMount(){
-    DataStore.listen(this.onChange);
-  }
-
-  componentWillUnmount(){
-    DataStore.unlisten(this.onChange);
-  }
-
-  onChange(state){
-    this.setState(state);
-  }
-
   render(){
 
     let totalCost;
-    if(this.state.cost >= 5000){
-      totalCost = '$' + this.state.cost;
-    }else if(this.state.cost){
-      totalCost = '$5000';
+    if(this.props.cost > 5000){
+      totalCost = '$' + this.props.cost;
+    }else if(this.props.cost){
+      totalCost = <span className="validationError">Invalid Data</span>
     }else{
       totalCost = 'No Preference';
     }
@@ -40,8 +21,8 @@ class InstantReview extends React.Component{
         </div>
         <h5><Link className="link-no-decoration" to="/college-search/guide/location">Location</Link></h5>
         <ul>
-          <li className="criteria_sub_heading">Raidus <br/><span className="criteria-answer">{this.state.radius ? this.state.radius + ' miles' : 'No Preference'}</span></li>
-          <li className="criteria_sub_heading">ZIP Code <br/><span className="criteria-answer">{this.state.zipCode ? this.state.zipCode : 'No Preference'}</span></li>
+          <li className="criteria_sub_heading">Raidus <br/><span className="criteria-answer">{this.props.radius ? this.props.radius + ' miles' : 'No Preference'}</span></li>
+          <li className="criteria_sub_heading">ZIP Code <br/><span className="criteria-answer">{this.props.zipCode ? this.props.zipCode : 'No Preference'}</span></li>
         </ul>
         <h5><Link className="link-no-decoration" to="/college-search/guide/cost">Cost</Link></h5>
         <ul>
@@ -49,17 +30,16 @@ class InstantReview extends React.Component{
         </ul>
         <h5><Link className="link-no-decoration" to="/college-search/guide/award">Award</Link></h5>
         <ul>
-          <li className="criteria_sub_heading">Award/Degree <br/> <span className="criteria-answer">{this.state.awardDescription ? this.state.awardDescription : 'No Preference'}</span></li>
+          <li className="criteria_sub_heading">Award/Degree <br/> <span className="criteria-answer">{this.props.awardDescription ? this.props.awardDescription : 'No Preference'}</span></li>
         </ul>
         <h5><Link className="link-no-decoration" to="/college-search/guide/program">Program</Link></h5>
         <ul>
-          <li className="criteria_sub_heading">Program <br/><span className="criteria-answer">{this.state.categoryDescription ? this.state.categoryDescription : 'No Preference'}</span></li>
-          <li className="criteria_sub_heading">Delivery <br/><span className="criteria-answer">{this.state.deliveryDescription ? this.state.deliveryDescription : 'No Preference'}</span></li>
+          <li className="criteria_sub_heading">Program <br/><span className="criteria-answer">{this.props.categoryDescription ? this.props.categoryDescription : 'No Preference'}</span></li>
+          <li className="criteria_sub_heading">Delivery <br/><span className="criteria-answer">{this.props.deliveryDescription ? this.props.deliveryDescription : 'No Preference'}</span></li>
         </ul>
       </div>
     )
   }
-
 }
 
 export default InstantReview;

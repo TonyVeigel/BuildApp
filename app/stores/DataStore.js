@@ -17,6 +17,7 @@ class DataStore {
     this.subcategoryDescription = '';
     this.delivery = '';
     this.deliveryDescription = '';
+    this.costValidationError = '';
   }
   onUpdateRadius(event){
     this.radius = event.target.value;
@@ -26,6 +27,11 @@ class DataStore {
   }
   onUpdateCost(event){
     this.cost = event.target.value;
+    if(this.cost && this.cost <= 5000){
+      this.costValidationError = 'Please enter a value greater than 5000.'
+    }else{
+      this.costValidationError = '';
+    }
   }
   onUpdateAward(event){
     this.award = event.target.value;
@@ -45,4 +51,4 @@ class DataStore {
   }
 }
 
-export default alt.createStore(DataStore);
+export default alt.createStore(DataStore, 'DataStore');

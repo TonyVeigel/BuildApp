@@ -33,8 +33,8 @@ class CollegeProgramPage extends React.Component{
       {style:'doing'},
       {style:'todo'}
     )
-    DataStore.listen(this.onChange);
     this.loadCategoriesFromServer();
+    DataStore.listen(this.onChange);
   }
 
   componentWillUnmount(){

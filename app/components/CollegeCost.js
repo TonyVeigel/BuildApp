@@ -17,9 +17,11 @@ class CollegeCost extends React.Component{
             <label>Total Cost</label>
             <div className="row">
               <div className="col-xs-4">
-                <input onChange={DataStoreActions.updateCost} value={this.props.cost} className="form-control" type="number" step="500" placeholder="Minimum 5000"/>
+                <input onChange={DataStoreActions.updateCost} value={this.props.cost} className="form-control" type="number" step="500" placeholder="Minimum 5100"/>
               </div>
             </div>
+            <a target="_blank" href="http://www.mnscu.edu/online/financialaid.html">Cost calculators & financial aid</a>
+            <div className="validationError">{this.props.costValidationError}</div>
           </div>
         </div>
         <br/>

@@ -8,10 +8,12 @@ import StepByStep from './components/StepByStep';
 import CollegeAwardPage from './components/CollegeAwardPage';
 import CollegeProgramPage from './components/CollegeProgramPage';
 import CollegeSearchPage from './components/CollegeSearchPage';
+import CollegeSearchExplained from './components/CollegeSearchExplained';
 
 export default (
   <Route path="/college-search/guide/" handler={App}>
     <Route path='begin' handler={WelcomePage}/>
+    <Route path="explained" handler={CollegeSearchExplained}/>
     <Route path='start' handler={StepByStep}>
       <Route path="/college-search/guide/location" handler={CollegeLocationPage}/>
       <Route path="/college-search/guide/cost" handler={CollegeCostPage}/>

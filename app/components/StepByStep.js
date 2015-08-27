@@ -1,20 +1,20 @@
 import React from 'react';
 import {RouteHandler} from 'react-router';
 import StepTabsContainer from './StepTabsContainer';
-import InstantReview from './InstantReview';
+import InstantReviewContainer from './InstantReviewContainer';
 
 class StepByStep extends React.Component{
 
   render(){
 
     return(
-        <div className="row main_container">
-          <div className="col-sm-8">
+      <div>
+          <div className="col-sm-10 col-md-8">
             <StepTabsContainer/>
             <RouteHandler/>
           </div>
-          <div className="hidden-xs col-sm-3 col-md-offset-1">
-            <InstantReview/>
+          <div className="hidden-xs col-sm-2 col-md-2 col-md-offset-1">
+            <InstantReviewContainer/>
           </div>
       </div>
     )

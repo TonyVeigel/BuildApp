@@ -11,7 +11,8 @@ class DataStoreActions{
       'updateAward',
       'updateCategory',
       'updateSubcategory',
-      'updateDelivery'
+      'updateDelivery',
+      'updateCostValidationError'
     );
   }
 

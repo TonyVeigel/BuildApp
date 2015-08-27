@@ -20,7 +20,7 @@ class WelcomeHeader extends React.Component{
           <a className="link-no-decoration" href='/college-search/public/institution?activeTab=mapSearch'>Location Search</a> -
         </span>
         <span className="stepByStep_link">
-          <Link className="link-no-decoration" to='/college-search/guide/location'>Guided Search</Link>
+          <Link className="link-no-decoration" to='/college-search/guide/explained'>Guided Search</Link>
         </span>
       </div>
     </div>

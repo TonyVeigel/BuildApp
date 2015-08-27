@@ -24,4 +24,4 @@ class SetTabsStore {
 
 }
 
-export default alt.createStore(SetTabsStore);
+export default alt.createStore(SetTabsStore, 'SetTabsStore');

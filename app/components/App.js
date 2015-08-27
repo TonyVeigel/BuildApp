@@ -10,7 +10,7 @@ class App extends React.Component{
       React-router is then initialized by calling the RouteHandler component.
      */
     return(
-      <div className="container">
+      <div className="container main_container">
         <RouteHandler/>
       </div>
     )

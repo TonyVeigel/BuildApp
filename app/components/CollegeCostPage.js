@@ -35,7 +35,7 @@ class CollegeCostPage extends React.Component{
       <div className="row">
         <div className="col-md-12">
           <div className="college_cost_container">
-            <CollegeCost cost={this.state.cost}/>
+            <CollegeCost costValidationError={this.state.costValidationError} cost={this.state.cost}/>
           </div>
         </div>
       </div>

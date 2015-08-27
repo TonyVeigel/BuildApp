@@ -35,7 +35,8 @@ class CollegeSearchPage extends React.Component{
         <div className="col-md-12">
           <div className="college_search_container">
             <CollegeSearch radius={this.state.radius} zipCode={this.state.zipCode} cost={this.state.cost} award={this.state.award}
-              category={this.state.category} delivery={this.state.delivery}/>
+              awardDescription={this.state.awardDescription} categoryDescription={this.state.categoryDescription}
+              deliveryDescription={this.state.deliveryDescription} category={this.state.category} delivery={this.state.delivery}/>
           </div>
         </div>
       </div>

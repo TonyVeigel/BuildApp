@@ -40,6 +40,7 @@ class CollegeProgram extends React.Component{
                   <option value="O">Fully online</option>
                   <option value="B">Partially online</option>
                 </select>
+                {this.props.delivery == "O" || this.props.delivery =="B" ? <a target="_blank" href="http://www.mnscu.edu/online/rightforyou.html">Learn more about online learning</a>: ''}
               </div>
             </div>
           </div>
