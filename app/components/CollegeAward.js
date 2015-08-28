@@ -16,7 +16,7 @@ class CollegeAward extends React.Component{
         <div className="row">
           <div className="col-md-12">
             <h2>Award/Degree</h2>
-            <p>Minnesota State Colleges and Universities offers many degree options:
+            <p>Minnesota State Colleges and Universities offers many degree options including:
             </p>
             <ul>
               <li>Certificates: Focus on one discipline and earn a certificate in less than a year.</li>

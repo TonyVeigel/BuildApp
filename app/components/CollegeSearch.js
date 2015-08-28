@@ -1,5 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
+import CollegeSearchExample from './CollegeSearchExample';
+import ProgramSearchExample from './ProgramSearchExample';
+import LocationSearchExample from './LocationSearchExample';
 
 class CollegeSearch extends React.Component{
 
@@ -22,7 +25,6 @@ class CollegeSearch extends React.Component{
       <div>
         <div className="row">
           <div className="col-md-12">
-            <h2>Search</h2>
             <p className="hidden-sm hidden-lg hidden-md">
               You have indicated that you would like to search within a radius of <span className="criteria-answer">{this.props.radius ? this.props.radius + ' miles' : 'No Preference'}</span>
             &nbsp;from ZIP Code <span className="criteria-answer">{this.props.zipCode ? this.props.zipCode : 'No Preference'}</span>. The total cost per year you would like to spend
@@ -30,32 +32,19 @@ class CollegeSearch extends React.Component{
           &nbsp;in the program <span className="criteria-answer">{this.props.categoryDescription ? this.props.categoryDescription : 'No Preference'}</span>. You would like the delivery of this program to be
           &nbsp;<span className="criteria-answer">{this.props.deliveryDescription ? this.props.deliveryDescription : 'No Preference'}</span>.
           <br/>
-          <br/>
         </p>
-        Next, select which type of search you are interested in from the options below.
       </div>
     </div>
     <br/>
-    <div className="row">
-      <div className="col-md-4">
-        <h3> <a target="_blank" href={collegeSearchLink + "&activeTab=collegeSearch"}>Institution Search</a></h3>
-        <p>
-          If you would like to see insititutions based on your criteria.
-          <br/>
-          <a target="_blank" href={collegeSearchLink + "&activeTab=collegeSearch"}>Institution Search</a>
-        </p>
+    <div className="row ">
+      <div className="border_bottom-grey col-md-12">
+        <CollegeSearchExample link={collegeSearchLink}/>
       </div>
-      <div className="col-md-4">
-        <h3><a target="_blank" href={collegeSearchLink + "&activeTab=programSearch"}>Program Search</a></h3>
-        If you would like to see programs based on your criteria.
-        <br/>
-        <a target="_blank" href={collegeSearchLink + "&activeTab=programSearch"}>Program Search</a>
+      <div className="border_bottom-grey col-md-12">
+        <ProgramSearchExample link={collegeSearchLink}/>
       </div>
-      <div className="col-md-4">
-        <h3><a target="_blank" href={collegeSearchLink + "&activeTab=mapSearch"}>Location Search</a></h3>
-        If you would like to see a map.
-        <br/>
-        <a target="_blank" href={collegeSearchLink + "&activeTab=mapSearch"}>Location Search</a>
+      <div className="col-md-12">
+        <LocationSearchExample link={collegeSearchLink}/>
       </div>
     </div>
     <br/>
@@ -69,7 +58,7 @@ class CollegeSearch extends React.Component{
       </div>
     </div>
   </div>)
-  }
+}
 }
 
 export default CollegeSearch;

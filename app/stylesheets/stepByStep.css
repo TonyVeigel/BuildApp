@@ -25,6 +25,10 @@ a:active.active, a:focus.active{
   margin-top: 75px;
 }
 
+.border_bottom-grey{
+  border-bottom: 1px dotted #ddd;
+}
+
 .instant_review_container{
   margin-top: 85px;
   border-bottom: 1px dotted #ddd;
@@ -116,6 +120,13 @@ ol.progtrckr li {
 ol.progtrckr li span {
   padding: 0 1.5rem;
 }
+
+@media (max-width: 800px){
+  ol.progtrckr li span {
+    padding: 0;
+  }
+}
+
 @media (max-width: 650px) {
   .progtrckr li span {
     display: none;
